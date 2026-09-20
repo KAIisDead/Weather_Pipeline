@@ -67,5 +67,3 @@ Durban                22.9       17.5        8.3
 Cape Town             19.4       11.2       15.7
 Pipeline finished.
 ```
-
-hboard on top of the results
