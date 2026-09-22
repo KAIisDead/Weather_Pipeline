@@ -44,12 +44,12 @@ weather-pipeline/
 
 1. Open the project in IntelliJ (or any Java IDE)
 2. Let Maven download the libraries it needs
-3. Run `Pipeline.java` (right-click it → Run)
+3. Run `Pipeline.java` (right-click it - Run)
 
 That's it — no setup, no API key, no separate database to install.
 
 If you want to actually look at the data, in IntelliJ go to
-**View → Tool Windows → Database → + → Data Source → SQLite**, and point it
+**View → Tool Windows - Database  +  Data Source - SQLite**, and point it
 at `data/weather.db`.
 
 ## What the output looks like
