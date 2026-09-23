@@ -8,8 +8,6 @@ makes sense (no missing values, no duplicates, no weird temperatures).
 It's basically the same idea used in real data pipelines, just small enough
 to build and understand in a weekend.
 
-## How it works
-
 There are 4 steps, and they run one after another:
 
 1. **Extract** — get the weather data from the internet (Open-Meteo API,
@@ -52,7 +50,7 @@ If you want to actually look at the data, in IntelliJ go to
 **View → Tool Windows - Database  +  Data Source - SQLite**, and point it
 at `data/weather.db`.
 
-## What the output looks like
+## What the output looks like:
 
 ```
 PASS: no missing temperatures
