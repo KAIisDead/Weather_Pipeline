@@ -5,17 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-/**
- * Step 2 of the pipeline: write the extracted rows into a SQLite table called raw_weather.
- */
 public class Loader {
 
-    /** Where the database file lives. SQLite creates it automatically if missing. */
     public static final String DB_URL = "jdbc:sqlite:data/weather.db";
 
-    /**
-     * Wipes the raw table and inserts the fresh rows.
-     */
+
+
     public void load(List<WeatherRow> rows) throws Exception {
         try (Connection connection = java.sql.DriverManager.getConnection(DB_URL)) {
 

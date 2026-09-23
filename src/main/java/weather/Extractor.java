@@ -12,13 +12,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Step 1 of the pipeline: download daily weather for each city from the Open-Meteo API.
- * No API key is needed.
- */
 public class Extractor {
 
-    /** The cities we track, each with its latitude and longitude. */
     private static final Map<String, double[]> CITIES = new LinkedHashMap<>();
 
     static {
@@ -32,9 +27,7 @@ public class Extractor {
     private final HttpClient client = HttpClient.newHttpClient();
     private final ObjectMapper mapper = new ObjectMapper();
 
-    /**
-     * Fetches every city and returns all the rows in one list.
-     */
+
     public List<WeatherRow> extractAll() throws Exception {
         List<WeatherRow> rows = new ArrayList<>();
         for (Map.Entry<String, double[]> entry : CITIES.entrySet()) {
@@ -45,9 +38,7 @@ public class Extractor {
         return rows;
     }
 
-    /**
-     * Calls the API for one city and turns the JSON answer into WeatherRow objects.
-     */
+
     private List<WeatherRow> extractCity(String city, double lat, double lon) throws Exception {
         String url = "https://api.open-meteo.com/v1/forecast"
                 + "?latitude=" + lat
