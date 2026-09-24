@@ -26,28 +26,20 @@ At the end it prints a little summary table to the console.
 
 Johannesburg, Cape Town, Durban, Nairobi, and Cairo.
 
-## Built with
-
-- Java 21
-- Maven
-- SQLite (a database that's just a file, no server needed)
-- Jackson (for reading the JSON the API sends back)
-- JUnit 5 (for the tests)
-
 ## Project files
 
 ```
 weather-pipeline/
 ├── pom.xml
 ├── data/
-│   └── weather.db              <- gets created automatically the first time you run it
+│   └── weather.db               gets created automatically the first time you run it
 ├── src/main/java/weather/
-│   ├── WeatherRow.java          <- one row of weather data
-│   ├── Extractor.java           <- step 1: get data from the API
-│   ├── Loader.java              <- step 2: save it to the database
-│   ├── Transformer.java         <- step 3: clean it up with SQL
-│   ├── QualityChecker.java      <- step 4: check it's not broken
-│   └── Pipeline.java            <- runs everything and prints the results
+│   ├── WeatherRow.java          one row of weather data
+│   ├── Extractor.java           step 1: get data from the API
+│   ├── Loader.java              step 2: save it to the database
+│   ├── Transformer.java         step 3: clean it up with SQL
+│   ├── QualityChecker.java      step 4: check it's not broken
+│   └── Pipeline.java            runs everything and prints the results
 └── src/test/java/weather/
     ├── WeatherRowTest.java
     ├── TransformerTest.java
