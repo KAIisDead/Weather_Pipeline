@@ -1,12 +1,15 @@
 # Weather Data Pipeline
 
 This is a small Java project I built to practice data engineering basics.
+
 It grabs 7 days of weather data for 5 cities from a free weather API, saves
 it into a database, cleans it up, and then checks that the data actually
 makes sense (no missing values, no duplicates, no weird temperatures).
 
 It's basically the same idea used in real data pipelines, just small enough
 to build and understand in a weekend.
+
+## How it works
 
 There are 4 steps, and they run one after another:
 
@@ -20,7 +23,16 @@ There are 4 steps, and they run one after another:
 At the end it prints a little summary table to the console.
 
 ## Cities it tracks
+
 Johannesburg, Cape Town, Durban, Nairobi, and Cairo.
+
+## Built with
+
+- Java 21
+- Maven
+- SQLite (a database that's just a file, no server needed)
+- Jackson (for reading the JSON the API sends back)
+- JUnit 5 (for the tests)
 
 ## Project files
 
@@ -28,29 +40,52 @@ Johannesburg, Cape Town, Durban, Nairobi, and Cairo.
 weather-pipeline/
 ├── pom.xml
 ├── data/
-│   └── weather.db          <- gets created automatically the first time you run it
-└── src/main/java/weather/
-    ├── WeatherRow.java      <- one row of weather data
-    ├── Extractor.java       <- step 1: get data from the API
-    ├── Loader.java          <- step 2: save it to the database
-    ├── Transformer.java     <- step 3: clean it up with SQL
-    ├── QualityChecker.java  <- step 4: check it's not broken
-    └── Pipeline.java        <- runs everything and prints the results
+│   └── weather.db              <- gets created automatically the first time you run it
+├── src/main/java/weather/
+│   ├── WeatherRow.java          <- one row of weather data
+│   ├── Extractor.java           <- step 1: get data from the API
+│   ├── Loader.java              <- step 2: save it to the database
+│   ├── Transformer.java         <- step 3: clean it up with SQL
+│   ├── QualityChecker.java      <- step 4: check it's not broken
+│   └── Pipeline.java            <- runs everything and prints the results
+└── src/test/java/weather/
+    ├── WeatherRowTest.java
+    ├── TransformerTest.java
+    └── QualityCheckerTest.java
 ```
 
 ## How to run it
 
 1. Open the project in IntelliJ (or any Java IDE)
 2. Let Maven download the libraries it needs
-3. Run `Pipeline.java` (right-click it - Run)
+3. Run `Pipeline.java` (right-click it → Run)
 
 That's it — no setup, no API key, no separate database to install.
 
+You can also run it from a terminal with:
+
+```
+mvn exec:java
+```
+
 If you want to actually look at the data, in IntelliJ go to
-**View → Tool Windows - Database  +  Data Source - SQLite**, and point it
+**View → Tool Windows → Database → + → Data Source → SQLite**, and point it
 at `data/weather.db`.
 
-## What the output looks like:
+## Running the tests
+
+Right-click the `weather` folder under `src/test/java` and choose
+**Run 'Tests in weather'**. The tests check that:
+
+- duplicate rows get removed correctly
+- the averages in the summary table are calculated correctly
+- the quality checks actually catch bad data (like an impossible temperature)
+
+Note: the tests use the same `data/weather.db` file as the real pipeline, so
+running them will overwrite whatever's in there at the time. Just run
+`Pipeline.main()` again afterward to refresh it with real data.
+
+## What the output looks like
 
 ```
 PASS: no missing temperatures
@@ -65,3 +100,10 @@ Durban                22.9       17.5        8.3
 Cape Town             19.4       11.2       15.7
 Pipeline finished.
 ```
+
+## Ideas to add later
+
+- Pull in another type of data (like air quality) and combine it
+- Keep old data instead of overwriting it every run
+- Make it run automatically every day
+- Add a simple chart or dashboard on top of the results
