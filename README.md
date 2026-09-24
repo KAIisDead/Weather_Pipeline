@@ -52,7 +52,6 @@ weather-pipeline/
 2. Let Maven download the libraries it needs
 3. Run `Pipeline.java` (right-click it → Run)
 
-That's it — no setup, no API key, no separate database to install.
 
 You can also run it from a terminal with:
 
@@ -73,7 +72,7 @@ Right-click the `weather` folder under `src/test/java` and choose
 - the averages in the summary table are calculated correctly
 - the quality checks actually catch bad data (like an impossible temperature)
 
-Note: the tests use the same `data/weather.db` file as the real pipeline, so
+the tests use the same `data/weather.db` file as the real pipeline, so
 running them will overwrite whatever's in there at the time. Just run
 `Pipeline.main()` again afterward to refresh it with real data.
 
@@ -93,9 +92,5 @@ Cape Town             19.4       11.2       15.7
 Pipeline finished.
 ```
 
-## Ideas to add later
-
-- Pull in another type of data (like air quality) and combine it
-- Keep old data instead of overwriting it every run
 - Make it run automatically every day
 - Add a simple chart or dashboard on top of the results
